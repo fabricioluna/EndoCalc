@@ -3,48 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FMS EndoCalc - Acadêmico</title>
+    <title>FMS EndoCalc - Apresentação de Tutoria</title>
     <style>
         :root {
             --fms-blue: #004a8d;
             --fms-gold: #c5a059;
-            --fms-bg: #f4f4f4;
+            --fms-bg: #f8f9fa;
             --fms-white: #ffffff;
+            --fms-dark: #2c3e50;
         }
 
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--fms-bg); display: flex; justify-content: center; padding: 20px; margin: 0; }
-        .container { background: var(--fms-white); width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); border-top: 12px solid var(--fms-blue); overflow: hidden; }
+        .container { background: var(--fms-white); width: 100%; max-width: 650px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border-top: 15px solid var(--fms-blue); overflow: hidden; }
         
-        .header { text-align: center; padding: 20px; background: #fff; border-bottom: 1px solid #eee; }
-        .header img { max-width: 220px; height: auto; }
-        
-        .section { padding: 25px; border-bottom: 8px solid var(--fms-bg); }
-        .section h2 { color: var(--fms-blue); font-size: 1.2rem; margin-top: 0; border-left: 5px solid var(--fms-gold); padding-left: 10px; text-transform: uppercase; }
-        
-        .formula-box { background: #2c3e50; color: #fff; padding: 12px; border-radius: 6px; text-align: center; font-family: 'Courier New', monospace; margin: 15px 0; font-size: 1rem; border: 1px solid var(--fms-gold); }
-        .formula-box span { color: var(--fms-gold); font-weight: bold; }
+        /* Cabeçalho */
+        .header { text-align: center; padding: 30px 20px; background: #fff; border-bottom: 2px solid #eee; }
+        .header img { max-width: 250px; height: auto; margin-bottom: 10px; }
+        .header h1 { color: var(--fms-blue); font-size: 1.5rem; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
 
-        .input-group { margin-bottom: 10px; }
-        label { display: block; font-size: 0.85rem; font-weight: bold; color: #444; margin-bottom: 5px; }
+        /* Seções */
+        .section { padding: 30px; border-bottom: 10px solid var(--fms-bg); }
+        .section h2 { color: var(--fms-blue); font-size: 1.3rem; margin-top: 0; border-left: 6px solid var(--fms-gold); padding-left: 12px; }
+
+        /* Blocos de Teoria (Antes do Cálculo) */
+        .theory-card { background: #fdfdfd; border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.9rem; line-height: 1.5; color: #444; }
+        .theory-card strong { color: var(--fms-blue); }
+        .formula-box { background: var(--fms-dark); color: #fff; padding: 12px; border-radius: 6px; text-align: center; font-family: 'Courier New', monospace; font-size: 1.1rem; margin: 10px 0; border: 1px solid var(--fms-gold); }
+        .formula-box span { color: var(--fms-gold); }
+
+        /* Inputs e Botões */
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-size: 0.85rem; font-weight: bold; color: #333; margin-bottom: 5px; }
         input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
+        .btn-calc { width: 100%; padding: 15px; background-color: var(--fms-blue); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; }
+        .btn-calc:hover { background-color: #003366; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-        .btn-calc { width: 100%; padding: 15px; background-color: var(--fms-blue); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; margin-top: 10px; transition: 0.3s; }
-        .btn-calc:hover { background-color: #003366; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        /* Área de Resultado (Após Cálculo) */
+        .result-area { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; animation: slideIn 0.4s ease-out; border-left: 8px solid; }
+        .res-math { font-family: monospace; font-size: 1rem; margin-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px; }
+        .res-value { font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; display: block; }
+        .res-interpretation { font-size: 0.95rem; font-style: italic; font-weight: 500; }
 
-        .result-area { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; animation: fadeIn 0.5s; line-height: 1.6; }
-        .res-math { font-family: monospace; font-size: 1.1rem; margin-bottom: 10px; color: #555; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px; }
-        .res-value { font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; display: block; }
-        
-        .info-block { background: rgba(255,255,255,0.7); padding: 12px; border-radius: 6px; font-size: 0.9rem; }
-        .info-block strong { color: var(--fms-blue); }
+        /* Estilos de Cores por Contexto */
+        .box-h { background: #eef2ff; border-color: #4338ca; color: #1e40af; }
+        .box-g { background: #fff7ed; border-color: #ea580c; color: #9a3412; }
+        .box-r { background: #f0fdf4; border-color: #16a34a; color: #166534; }
+        .box-m { background: #fef2f2; border-color: #dc2626; color: #991b1b; }
 
-        /* Estilização por Função */
-        .box-erro { background: #fff5f5; border: 1px solid #feb2b2; color: #9b2c2c; }
-        .box-racio { background: #f0fff4; border: 1px solid #9ae6b4; color: #276749; }
-        .box-homa { background: #fffaf0; border: 1px solid #fbd38d; color: #9c4221; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .footer { text-align: center; padding: 20px; font-size: 0.75rem; color: #888; letter-spacing: 1px; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .footer { text-align: center; padding: 25px; font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -52,105 +59,133 @@
 <div class="container">
     <div class="header">
         <img src="https://medicinadosertao.com.br/wp-content/uploads/2021/03/logo-fms-colorido.png" alt="FMS Logo">
-        <h1>Simulador de Homeostase Endócrina</h1>
+        <h1>EndoCalc - Analisador de Homeostase</h1>
     </div>
 
     <div class="section">
-        <h2>1. Cálculo do Erro Homeostático (ΔH)</h2>
-        <div class="formula-box">ΔH = <span>Alvo (500)</span> - <span>H (Atual)</span></div>
-        <div class="input-group">
-            <label>Testosterona Sérica Atual (ng/dL)</label>
-            <input type="number" id="testo" value="80">
+        <h2>1. Dinâmica da Homeostase (dH/dt)</h2>
+        <div class="theory-card">
+            <strong>Equação:</strong> dH/dt = k × (S - H)<br>
+            <strong>Variáveis:</strong> <em>S</em> (Set-point/Alvo: 500); <em>H</em> (Nível Atual); <em>k</em> (Constante de Sensibilidade).<br>
+            <strong>Objetivo:</strong> Medir a velocidade e a "pressão" que o corpo exerce para retornar ao equilíbrio.<br>
+            <strong>Resultado Ótimo:</strong> Zero (Indica que o sistema está em equilíbrio estável).
         </div>
-        <button class="btn-calc" onclick="calcErro()">Explicar Equação do Erro</button>
-        
-        <div id="box-erro" class="result-area box-erro">
-            <div id="math-erro" class="res-math"></div>
-            <span id="val-erro" class="res-value"></span>
-            <div class="info-block">
-                <strong>Variável H:</strong> Nível circulante atual de testosterona.<br>
-                <strong>O que se espera (Ótimo):</strong> Um ΔH próximo de zero, indicando que o paciente atingiu o alvo fisiológico masculino.<br>
-                <strong>Significado Clínico:</strong> O erro de 420ng/dL no Rodrigo prova que o "termostato" (Hipotálamo) não está disparando GnRH para corrigir o déficit.
-            </div>
+        <div class="formula-box">dH/dt = 0.1 × (<span>500</span> - <span>H</span>)</div>
+        <div class="input-group">
+            <label>Nível Atual de Testosterona (H):</label>
+            <input type="number" id="h_val" value="80">
+        </div>
+        <button class="btn-calc" onclick="calcDif()">Calcular Reação do Sistema</button>
+        <div id="res-dif" class="result-area box-h">
+            <div id="math-dif" class="res-math"></div>
+            <span id="val-dif" class="res-value"></span>
+            <div id="int-dif" class="res-interpretation"></div>
         </div>
     </div>
 
     <div class="section">
-        <h2>2. Rácio de Maturação Óssea (R)</h2>
-        <div class="formula-box">R = <span>Idade Óssea (IO)</span> / <span>Idade Cronológica (IC)</span></div>
-        <div class="input-group">
-            <label>Idade Óssea (Anos - via Raio-X)</label>
-            <input type="number" id="io" value="14">
+        <h2>2. Estabilidade do Eixo (Ganho G)</h2>
+        <div class="theory-card">
+            <strong>Equação:</strong> G = A / (1 + Aβ)<br>
+            <strong>Variáveis:</strong> <em>A</em> (Estímulo central/Hipofisário); <em>β</em> (Força do feedback negativo - fixo em 10).<br>
+            <strong>Objetivo:</strong> Avaliar a eficiência da comunicação entre o comando (cérebro) e o alvo (gônada).<br>
+            <strong>Resultado Ótimo:</strong> Um valor estável (Normalmente entre 0.04 e 0.08).
         </div>
+        <div class="formula-box">G = <span>A</span> / (1 + <span>A × 10</span>)</div>
         <div class="input-group">
-            <label>Idade Cronológica (Anos - Registro)</label>
-            <input type="number" id="ic" value="18">
+            <label>Estímulo Central (A) [Escala 0 a 1]:</label>
+            <input type="number" id="a_val" value="0.1" step="0.1">
         </div>
-        <button class="btn-calc" onclick="calcRacio()">Analisar Segurança de Crescimento</button>
-        
-        <div id="box-racio" class="result-area box-racio">
+        <button class="btn-calc" onclick="calcGanho()">Analisar Estabilidade do Eixo</button>
+        <div id="res-ganho" class="result-area box-g">
+            <div id="math-ganho" class="res-math"></div>
+            <span id="val-ganho" class="res-value"></span>
+            <div id="int-ganho" class="res-interpretation"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Segurança de Crescimento (R)</h2>
+        <div class="theory-card">
+            <strong>Equação:</strong> R = IO / IC<br>
+            <strong>Variáveis:</strong> <em>IO</em> (Idade Óssea); <em>IC</em> (Idade Cronológica).<br>
+            <strong>Objetivo:</strong> Determinar se a terapia de reposição é segura ou se causará baixa estatura final.<br>
+            <strong>Resultado Ótimo:</strong> Menor que 1.0 (Indica potencial de crescimento).
+        </div>
+        <div class="formula-box">R = <span>IO</span> / <span>18</span></div>
+        <div class="input-group">
+            <label>Idade Óssea (Anos):</label>
+            <input type="number" id="io_val" value="14">
+        </div>
+        <button class="btn-calc" onclick="calcRacio()">Verificar Janela Óssea</button>
+        <div id="res-racio" class="result-area box-r">
             <div id="math-racio" class="res-math"></div>
             <span id="val-racio" class="res-value"></span>
-            <div class="info-block">
-                <strong>Variáveis:</strong> <em>IO</em> é a idade biológica dos tecidos; <em>IC</em> é o tempo de vida.<br>
-                <strong>O que se espera (Ótimo):</strong> No tratamento do hipogonadismo, esperamos que <strong>R < 1</strong>. <br>
-                <strong>Significado Clínico:</strong> Se o rácio for 0.77, o Rodrigo ainda tem 23% de potencial de crescimento. Se o rácio chegar a 1.0, as epífises fecharam e o tratamento hormonal não aumentará mais sua altura.
-            </div>
+            <div id="int-racio" class="res-interpretation"></div>
         </div>
     </div>
 
     <div class="section">
-        <h2>3. Homeostase da Insulina (HOMA-IR)</h2>
-        <div class="formula-box">HOMA-IR = (<span>Glicose</span> × <span>Insulina</span>) / 405</div>
-        <div class="input-group">
-            <label>Glicose de Jejum (mg/dL)</label>
-            <input type="number" id="glic" value="90">
+        <h2>4. Índice Metabólico (HOMA-IR)</h2>
+        <div class="theory-card">
+            <strong>Equação:</strong> (Glicose × Insulina) / 405<br>
+            <strong>Variáveis:</strong> <em>Glicose</em> (mg/dL); <em>Insulina</em> (µUI/mL).<br>
+            <strong>Objetivo:</strong> Avaliar a resistência insulínica decorrente do desequilíbrio hormonal e gordura ginóide.<br>
+            <strong>Resultado Ótimo:</strong> Abaixo de 2.5.
         </div>
+        <div class="formula-box">HOMA = (<span>90</span> × <span>I</span>) / 405</div>
         <div class="input-group">
-            <label>Insulina de Jejum (µUI/mL)</label>
-            <input type="number" id="ins" value="15">
+            <label>Insulina de Jejum (I):</label>
+            <input type="number" id="ins_val" value="15">
         </div>
-        <button class="btn-calc" onclick="calcHoma()">Avaliar Equilíbrio Metabólico</button>
-        
-        <div id="box-homa" class="result-area box-homa">
+        <button class="btn-calc" onclick="calcHoma()">Analisar Risco Metabólico</button>
+        <div id="res-homa" class="result-area box-m">
             <div id="math-homa" class="res-math"></div>
             <span id="val-homa" class="res-value"></span>
-            <div class="info-block">
-                <strong>Variáveis:</strong> <em>Glicose</em> (combustível) e <em>Insulina</em> (chave de entrada).<br>
-                <strong>O que se espera (Ótimo):</strong> Valores <strong>abaixo de 2.5</strong>.<br>
-                <strong>Significado Clínico:</strong> Um HOMA elevado no Rodrigo indica que a falta de testosterona e a gordura ginóide estão gerando resistência insulínica, sobrecarregando o pâncreas.
-            </div>
+            <div id="int-homa" class="res-interpretation"></div>
         </div>
     </div>
 
-    <div class="footer">FACULDADE MEDICINA DO SERTÃO • TUTORIA DE ENDOCRINOLOGIA</div>
+    <div class="footer">FMS • FACULDADE MEDICINA DO SERTÃO • 2026</div>
 </div>
 
 <script>
-    function calcErro() {
-        const h = document.getElementById('testo').value;
-        const res = 500 - h;
-        document.getElementById('math-erro').innerText = `Memória: 500 (Alvo) - ${h} (Atual)`;
-        document.getElementById('val-erro').innerText = `Déficit Sérico: ${res} ng/dL`;
-        document.getElementById('box-erro').style.display = 'block';
+    function calcDif() {
+        const h = document.getElementById('h_val').value;
+        const res = (0.1 * (500 - h)).toFixed(1);
+        document.getElementById('math-dif').innerText = `dH/dt = 0.1 * (500 - ${h})`;
+        document.getElementById('val-dif').innerText = `Velocidade de Reação: +${res}`;
+        document.getElementById('int-dif').innerText = `Interpretação: O valor positivo indica uma forte pressão homeostática para aumentar a testosterona. O sistema 'sente' o erro, mas a falha central impede a execução.`;
+        document.getElementById('res-dif').style.display = 'block';
+    }
+
+    function calcGanho() {
+        const a = parseFloat(document.getElementById('a_val').value);
+        const res = (a / (1 + (a * 10))).toFixed(3);
+        document.getElementById('math-ganho').innerText = `G = ${a} / (1 + (${a} * 10))`;
+        document.getElementById('val-ganho').innerText = `Ganho (G): ${res}`;
+        document.getElementById('int-ganho').innerText = `Interpretação: No Rodrigo (A=0.1), o ganho é baixo (${res}). Isso indica um eixo dormente/fraco que não consegue sustentar a estabilidade sozinho.`;
+        document.getElementById('res-ganho').style.display = 'block';
     }
 
     function calcRacio() {
-        const io = document.getElementById('io').value;
-        const ic = document.getElementById('ic').value;
-        const res = (io / ic).toFixed(2);
-        document.getElementById('math-racio').innerText = `Memória: ${io} (IO) / ${ic} (IC)`;
+        const io = document.getElementById('io_val').value;
+        const res = (io / 18).toFixed(2);
+        document.getElementById('math-racio').innerText = `R = ${io} / 18`;
         document.getElementById('val-racio').innerText = `Rácio: ${res}`;
-        document.getElementById('box-racio').style.display = 'block';
+        let msg = res < 1 ? "✅ Janela Aberta: O paciente ainda possui potencial de estirão puberal significativo." : "❌ Janela Fechada: Maturidade esquelética atingida.";
+        document.getElementById('int-racio').innerText = msg;
+        document.getElementById('res-racio').style.display = 'block';
     }
 
     function calcHoma() {
-        const g = document.getElementById('glic').value;
-        const i = document.getElementById('ins').value;
-        const res = ((g * i) / 405).toFixed(2);
-        document.getElementById('math-homa').innerText = `Memória: (${g} x ${i}) / 405`;
-        document.getElementById('val-homa').innerText = `Índice HOMA: ${res}`;
-        document.getElementById('box-homa').style.display = 'block';
+        const ins = document.getElementById('ins_val').value;
+        const res = ((90 * ins) / 405).toFixed(2);
+        document.getElementById('math-homa').innerText = `HOMA = (90 * ${ins}) / 405`;
+        document.getElementById('val-homa').innerText = `Índice: ${res}`;
+        let msg = res > 2.5 ? "⚠️ Alerta: Resistência insulínica detectada. Risco de Síndrome Metabólica por hipogonadismo." : "✅ Normal: Sensibilidade à insulina preservada.";
+        document.getElementById('int-homa').innerText = msg;
+        document.getElementById('res-homa').style.display = 'block';
     }
 </script>
 
