@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FMS - Biofísica da Homeostase</title>
+    <title>FMS - A Matemática da Homeostase</title>
     <style>
         :root { --fms-blue: #004a8d; --fms-gold: #c5a059; --fms-bg: #f0f2f5; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--fms-bg); display: flex; justify-content: center; padding: 20px; }
         .container { background: white; width: 100%; max-width: 600px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-top: 15px solid var(--fms-blue); overflow: hidden; }
+        
+        /* Frase de Efeito no Topo */
+        .intro-quote { background: var(--fms-blue); color: white; padding: 25px; text-align: center; font-style: italic; font-size: 1.1rem; line-height: 1.5; border-bottom: 5px solid var(--fms-gold); }
+        
         .header { text-align: center; padding: 20px; border-bottom: 2px solid #eee; }
         .header img { max-width: 200px; }
+        
         .section { padding: 25px; border-bottom: 10px solid var(--fms-bg); }
         h2 { color: var(--fms-blue); font-size: 1.2rem; border-left: 5px solid var(--fms-gold); padding-left: 10px; margin-bottom: 15px; }
         
-        /* Estilo da Explicação Pré-Cálculo */
         .pre-calc-info { background: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 8px; font-size: 0.9rem; color: #444; margin-bottom: 15px; line-height: 1.4; }
         .pre-calc-info b { color: var(--fms-blue); }
         
@@ -25,7 +29,6 @@
         button { width: 100%; padding: 15px; background: var(--fms-blue); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         button:hover { background: #003366; }
 
-        /* Estilo do Resultado Dinâmico */
         .result-box { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; border-left: 8px solid; animation: fadeIn 0.4s ease; }
         .res-math { font-family: monospace; font-size: 1rem; opacity: 0.8; margin-bottom: 10px; }
         .res-val { font-size: 1.6rem; font-weight: bold; display: block; margin-bottom: 12px; }
@@ -42,21 +45,25 @@
 <body>
 
 <div class="container">
+    <div class="intro-quote">
+        "A homeostase não é um estado estático, é uma equação de busca pelo zero. O corpo está o tempo todo calculando a diferença entre onde ele está e onde ele deveria estar."
+    </div>
+
     <div class="header">
         <img src="https://medicinadosertao.com.br/wp-content/uploads/2021/03/logo-fms-colorido.png" alt="FMS">
-        <h1>Biofísica e Controle Homeostático</h1>
+        <h1>Inteligência Bio-Matemática</h1>
     </div>
 
     <div class="section">
         <h2>1. Dinâmica da Homeostase (dH/dt)</h2>
         
         <div class="pre-calc-info">
-            <b>A Equação:</b> Esta fórmula descreve a velocidade de ajuste do sistema. O corpo humano funciona como um termostato: ele calcula a diferença entre o alvo e o estado real.<br><br>
+            <b>A Equação:</b> Esta fórmula descreve a velocidade de ajuste do sistema. O organismo atua como um controlador que busca anular a distância entre o estado real e o alvo.<br><br>
             <b>Variáveis:</b><br>
-            • <b>S (Set-point):</b> O alvo fisiológico ideal.<br>
-            • <b>H (Estado Atual):</b> O nível hormonal medido.<br>
-            • <b>k:</b> A constante de sensibilidade do eixo.<br><br>
-            <b>Objetivo:</b> Em homeostase, o erro (S - H) deve ser <b>Zero</b>.
+            • <b>S (Set-point):</b> O alvo fisiológico ideal (ex: 500 ng/dL).<br>
+            • <b>H (Estado Atual):</b> O nível hormonal real do paciente.<br>
+            • <b>k:</b> Constante de sensibilidade do eixo HHG.<br><br>
+            <b>Objetivo:</b> Em homeostase, dH/dt tende a <b>Zero</b>.
         </div>
 
         <div class="formula-display">dH/dt = k × (<span>S</span> - <span>H</span>)</div>
@@ -79,11 +86,11 @@
         <h2>2. Rácio de Maturação (Segurança)</h2>
         
         <div class="pre-calc-info">
-            <b>A Equação:</b> Determina a homeostase do desenvolvimento esquelético. Avalia se o tempo biológico está síncrono com o tempo cronológico.<br><br>
+            <b>A Equação:</b> Mede a homeostase temporal. Avalia o equilíbrio entre a maturação biológica e o tempo cronológico para definir janelas de oportunidade.<br><br>
             <b>Variáveis:</b><br>
-            • <b>IO:</b> Maturidade óssea (exame de raio-x).<br>
-            • <b>IC:</b> Idade real do paciente.<br><br>
-            <b>Objetivo:</b> Um valor <b>inferior a 1.0</b> indica que o sistema ainda não atingiu o equilíbrio final (fechamento das epífises).
+            • <b>IO:</b> Maturidade óssea avaliada por raio-x.<br>
+            • <b>IC:</b> Idade cronológica do paciente.<br><br>
+            <b>Objetivo:</b> Valores <b>inferiores a 1.0</b> indicam que o sistema ainda não atingiu o equilíbrio final de crescimento.
         </div>
 
         <div class="formula-display">R = <span>IO</span> / <span>IC</span></div>
@@ -120,16 +127,16 @@
 
         if (taxa > 30) {
             resBox.className = 'result-box danger';
-            txt.innerHTML = "<b>Diagnóstico: Falha Crítica de Feedback.</b> O erro positivo elevado mostra que o corpo está em um estado de urgência para compensar o déficit, mas a homeostase não se completa por ausência de sinal central (Kallmann).";
+            txt.innerHTML = "<b>Diagnóstico: Falha Crítica de Feedback.</b> O erro positivo elevado indica que o sistema identifica o déficit, mas a homeostase está bloqueada. O corpo tenta buscar o 'zero' de erro, mas não há estímulo central para efetivar a resposta.";
         } else if (taxa > 0 && taxa <= 30) {
             resBox.className = 'result-box warn';
-            txt.innerHTML = "<b>Diagnóstico: Compensação Ativa.</b> O sistema está em fase de ajuste. A homeostase está tentando reduzir o erro, aproximando-se gradualmente do alvo estável.";
+            txt.innerHTML = "<b>Diagnóstico: Compensação Ativa.</b> O organismo está em fase de ajuste dinâmico. A homeostase está reduzindo o erro gradualmente para atingir o estado de equilíbrio estável.";
         } else if (taxa == 0) {
             resBox.className = 'result-box good';
-            txt.innerHTML = "<b>Diagnóstico: Homeostase Atingida.</b> O erro foi anulado. O sistema atingiu o estado estacionário onde dH/dt = 0.";
+            txt.innerHTML = "<b>Diagnóstico: Homeostase Atingida.</b> Equilíbrio estável. O valor medido é idêntico ao set-point, anulando a pressão por variação (dH/dt = 0).";
         } else {
             resBox.className = 'result-box danger';
-            txt.innerHTML = "<b>Diagnóstico: Sobrecarga.</b> O valor atual excede o set-point, gerando uma taxa negativa para tentar reduzir os níveis e evitar toxicidade.";
+            txt.innerHTML = "<b>Diagnóstico: Sobrecarga.</b> O valor excede o alvo. A taxa negativa indica um esforço homeostático para reduzir os níveis e reestabelecer o equilíbrio.";
         }
     }
 
@@ -144,15 +151,15 @@
         document.getElementById('math2').innerText = `R = ${io} / ${ic}`;
         document.getElementById('val2').innerText = `Rácio (R): ${r}`;
 
-        if (r < 0.8) {
+        if (r < 0.85) {
             resBox.className = 'result-box good';
-            txt.innerHTML = "<b>Conduta: Segurança Total.</b> O rácio muito abaixo de 1.0 prova que a homeostase do crescimento ainda tem reserva. Há 'tempo matemático' para induzir a puberdade com segurança estatural.";
-        } else if (r >= 0.8 && r < 1.0) {
+            txt.innerHTML = "<b>Conduta: Segurança Total.</b> O sistema ainda não buscou o equilíbrio final (fusão). Existe uma reserva biológica ampla para intervenção hormonal sem prejuízo estatural.";
+        } else if (r >= 0.85 && r < 1.0) {
             resBox.className = 'result-box warn';
-            txt.innerHTML = "<b>Conduta: Alerta Clínico.</b> O sistema está se aproximando do equilíbrio final (fusão). A reposição deve ser cautelosa para não acelerar o 'zero' do crescimento precocemente.";
+            txt.innerHTML = "<b>Conduta: Alerta Crítico.</b> A homeostase do desenvolvimento está próxima de se completar. A margem de erro para a reposição é mínima; doses altas acelerarão a fusão óssea.";
         } else {
             resBox.className = 'result-box danger';
-            txt.innerHTML = "<b>Conduta: Maturidade Atingida.</b> Rácio ≥ 1.0 indica que o potencial de crescimento foi exaurido. O foco deve ser apenas na reposição hormonal de manutenção.";
+            txt.innerHTML = "<b>Conduta: Homeostase Finalizada.</b> Rácio ≥ 1.0 indica maturidade óssea completa. O 'zero' de crescimento foi atingido; a terapia agora foca apenas na virilização.";
         }
     }
 </script>
