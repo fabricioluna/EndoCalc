@@ -3,97 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FMS - EndoCalc Rodrigo</title>
+    <title>EndoCalc FMS - Caso Rodrigo</title>
     <style>
         :root {
-            --fms-green: #004d40; 
-            --fms-gold: #c5a059;  
-            --fms-light: #f4f7f6;
+            --fms-blue: #0071bc;
+            --fms-green: #58b947;
+            --fms-red: #ed1c24;
+            --fms-gold: #fbb03b;
+            --fms-dark: #2c3e50;
         }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--fms-light); display: flex; justify-content: center; padding: 20px; }
-        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; border-top: 8px solid var(--fms-green); }
-        h1 { color: var(--fms-green); font-size: 1.4rem; text-align: center; margin-bottom: 20px; border-bottom: 2px solid var(--fms-gold); padding-bottom: 10px; }
-        .input-group { margin-bottom: 12px; }
-        label { display: block; margin-bottom: 4px; color: #555; font-size: 0.85rem; font-weight: bold; }
-        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: var(--fms-green); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; margin-top: 10px; }
-        button:hover { background: #00332c; transform: translateY(-2px); }
-        .result-box { margin-top: 20px; padding: 15px; background: #f0f4f3; border-radius: 10px; border-left: 6px solid var(--fms-gold); display: none; }
-        .res-item { margin-top: 10px; font-weight: bold; color: var(--fms-green); border-top: 1px solid #ddd; padding-top: 5px; }
-        .interpretation { font-size: 0.8rem; color: #444; background: white; padding: 8px; border-radius: 4px; margin-top: 5px; line-height: 1.3; }
-        .logo-text { text-align: center; font-weight: bold; color: var(--fms-gold); font-size: 0.7rem; letter-spacing: 1px; margin-bottom: 5px; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            color: var(--fms-dark);
+        }
+
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border-top: 10px solid var(--fms-blue);
+        }
+
+        .header {
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+        }
+
+        .header img {
+            max-width: 180px;
+            height: auto;
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            color: var(--fms-blue);
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--fms-blue);
+        }
+
+        input {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--fms-green);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--fms-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--fms-green);
+        }
+
+        .results {
+            margin-top: 25px;
+            display: none;
+        }
+
+        .formula-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--fms-gold);
+        }
+
+        .formula-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--fms-blue);
+        }
+
+        .equation-display {
+            font-family: 'Courier New', Courier, monospace;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px dashed #ccc;
+            margin: 10px 0;
+            font-size: 1rem;
+            color: var(--fms-red);
+        }
+
+        .interpretation {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #555;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--fms-green);
+        }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <div class="logo-text">FACULDADE MEDICINA DO SERTÃO</div>
-    <h1>EndoCalc - Caso Rodrigo</h1>
-    
-    <div class="input-group">
-        <label>Testosterona Atual (ng/dL)</label>
-        <input type="number" id="atual" value="80">
-    </div>
-
-    <div class="input-group">
-        <label>Idade Óssea (Anos)</label>
-        <input type="number" id="io" value="14">
-    </div>
-
-    <div class="input-group">
-        <label>Glicose de Jejum (mg/dL)</label>
-        <input type="number" id="glicose" value="90">
-    </div>
-
-    <div class="input-group">
-        <label>Insulina de Jejum (µUI/mL)</label>
-        <input type="number" id="insulina" value="15">
-    </div>
-
-    <button onclick="calcularFMS()">Analisar Homeostase</button>
-
-    <div id="resArea" class="result-box">
-        <div class="res-item">1. Erro Homeostático: <span id="vErro"></span> ng/dL</div>
-        <div class="interpretation">Défice em relação ao alvo de 500ng/dL. Indica falha grave no eixo HHG.</div>
-        
-        <div class="res-item">2. Rácio de Crescimento (IO/IC): <span id="vRacio"></span></div>
-        <div class="interpretation" id="interpCresc"></div>
-
-        <div class="res-item">3. HOMA-IR: <span id="vHoma"></span></div>
-        <div class="interpretation" id="interpHoma"></div>
-    </div>
-</div>
-
-<script>
-    function calcularFMS() {
-        const atual = parseFloat(document.getElementById('atual').value);
-        const io = parseFloat(document.getElementById('io').value);
-        const glic = parseFloat(document.getElementById('glicose').value);
-        const insu = parseFloat(document.getElementById('insulina').value);
-        
-        // Cálculos
-        const erro = 500 - atual;
-        const racio = io / 18; 
-        const homa = (glic * insu) / 405;
-
-        document.getElementById('resArea').style.display = 'block';
-        document.getElementById('vErro').innerText = erro;
-        document.getElementById('vRacio').innerText = racio.toFixed(2);
-        document.getElementById('vHoma').innerText = homa.toFixed(2);
-
-        // Interpretação Rácio
-        let msgCresc = racio < 1 
-            ? "✅ Janela Aberta: O paciente ainda possui potencial de crescimento estatural." 
-            : "❌ Janela Fechada: Epífises ósseas fundidas ou próximas da fusão.";
-        document.getElementById('interpCresc').innerText = msgCresc;
-
-        // Interpretação HOMA
-        let msgHoma = homa > 2.5 
-            ? "⚠️ Resistência Insulínica: Risco metabólico elevado, comum no hipogonadismo." 
-            : "✅ Sensibilidade Normal: Homeostase glicêmica preservada.";
-        document.getElementById('interpHoma').innerText = msgHoma;
-    }
-</script>
-
-</body>
-</html>
+    <div class="header">
+        <img src="
