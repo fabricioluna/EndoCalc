@@ -3,113 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FMS EndoCalc - Modular</title>
+    <title>FMS EndoCalc - Acadêmico</title>
     <style>
         :root {
             --fms-blue: #004a8d;
             --fms-gold: #c5a059;
-            --fms-red: #d32f2f;
-            --fms-green: #2e7d32;
             --fms-bg: #f4f4f4;
+            --fms-white: #ffffff;
         }
 
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--fms-bg); display: flex; justify-content: center; padding: 20px; margin: 0; }
-        .container { background: white; width: 100%; max-width: 550px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); border-top: 12px solid var(--fms-blue); overflow: hidden; }
+        .container { background: var(--fms-white); width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); border-top: 12px solid var(--fms-blue); overflow: hidden; }
         
         .header { text-align: center; padding: 20px; background: #fff; border-bottom: 1px solid #eee; }
-        .header img { max-width: 200px; height: auto; }
+        .header img { max-width: 220px; height: auto; }
         
-        .section { padding: 20px; border-bottom: 5px solid var(--fms-bg); }
-        .section h2 { color: var(--fms-blue); font-size: 1.1rem; margin-top: 0; border-left: 4px solid var(--fms-gold); padding-left: 10px; }
+        .section { padding: 25px; border-bottom: 8px solid var(--fms-bg); }
+        .section h2 { color: var(--fms-blue); font-size: 1.2rem; margin-top: 0; border-left: 5px solid var(--fms-gold); padding-left: 10px; text-transform: uppercase; }
         
-        .formula-box { background: #2c3e50; color: #fff; padding: 10px; border-radius: 6px; text-align: center; font-family: 'Courier New', monospace; margin: 10px 0; font-size: 0.9rem; }
-        .formula-box span { color: var(--fms-gold); }
+        .formula-box { background: #2c3e50; color: #fff; padding: 12px; border-radius: 6px; text-align: center; font-family: 'Courier New', monospace; margin: 15px 0; font-size: 1rem; border: 1px solid var(--fms-gold); }
+        .formula-box span { color: var(--fms-gold); font-weight: bold; }
 
         .input-group { margin-bottom: 10px; }
-        label { display: block; font-size: 0.8rem; font-weight: bold; color: #555; margin-bottom: 5px; }
-        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        label { display: block; font-size: 0.85rem; font-weight: bold; color: #444; margin-bottom: 5px; }
+        input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
 
-        .btn-calc { width: 100%; padding: 12px; background-color: var(--fms-blue); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.3s; }
-        .btn-calc:hover { background-color: #003366; }
+        .btn-calc { width: 100%; padding: 15px; background-color: var(--fms-blue); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; margin-top: 10px; transition: 0.3s; }
+        .btn-calc:hover { background-color: #003366; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
 
-        .result-area { display: none; margin-top: 15px; padding: 15px; border-radius: 8px; animation: fadeIn 0.5s; }
-        .res-value { font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; }
-        .res-expl { font-size: 0.85rem; line-height: 1.4; color: #333; }
+        .result-area { display: none; margin-top: 20px; padding: 20px; border-radius: 8px; animation: fadeIn 0.5s; line-height: 1.6; }
+        .res-math { font-family: monospace; font-size: 1.1rem; margin-bottom: 10px; color: #555; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px; }
+        .res-value { font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; display: block; }
+        
+        .info-block { background: rgba(255,255,255,0.7); padding: 12px; border-radius: 6px; font-size: 0.9rem; }
+        .info-block strong { color: var(--fms-blue); }
 
-        /* Cores específicas para os resultados */
-        .res-erro { background: #feecec; border: 1px solid #f5c6cb; color: #721c24; }
-        .res-racio { background: #e7f3ef; border: 1px solid #c3e6cb; color: #155724; }
-        .res-homa { background: #fff3cd; border: 1px solid #ffeeba; color: #856404; }
+        /* Estilização por Função */
+        .box-erro { background: #fff5f5; border: 1px solid #feb2b2; color: #9b2c2c; }
+        .box-racio { background: #f0fff4; border: 1px solid #9ae6b4; color: #276749; }
+        .box-homa { background: #fffaf0; border: 1px solid #fbd38d; color: #9c4221; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        .footer { text-align: center; padding: 15px; font-size: 0.7rem; color: #777; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .footer { text-align: center; padding: 20px; font-size: 0.75rem; color: #888; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <img src="https://medicinadosertao.com.br/wp-content/uploads/2021/03/logo-fms-colorido.png" alt="FMS">
-        <div style="color: var(--fms-gold); font-weight: bold; font-size: 0.8rem; letter-spacing: 1px;">SISTEMA DE SUPORTE À DECISÃO CLÍNICA</div>
+        <img src="https://medicinadosertao.com.br/wp-content/uploads/2021/03/logo-fms-colorido.png" alt="FMS Logo">
+        <h1>Simulador de Homeostase Endócrina</h1>
     </div>
 
     <div class="section">
-        <h2>1. Homeostase do Eixo (ΔH)</h2>
-        <div class="formula-box">ΔH = 500 - <span>H (Atual)</span></div>
+        <h2>1. Cálculo do Erro Homeostático (ΔH)</h2>
+        <div class="formula-box">ΔH = <span>Alvo (500)</span> - <span>H (Atual)</span></div>
         <div class="input-group">
-            <label>Testosterona Atual (ng/dL)</label>
+            <label>Testosterona Sérica Atual (ng/dL)</label>
             <input type="number" id="testo" value="80">
         </div>
-        <button class="btn-calc" onclick="calcErro()">Calcular Déficit</button>
-        <div id="box-erro" class="result-area res-erro">
-            <div id="val-erro" class="res-value"></div>
-            <div class="res-expl"><strong>Significado:</strong> Este valor representa o erro homeostático. O sistema KNDy/GnRH deveria identificar este déficit e aumentar a secreção, mas no Rodrigo a "via de comando" está interrompida.</div>
+        <button class="btn-calc" onclick="calcErro()">Explicar Equação do Erro</button>
+        
+        <div id="box-erro" class="result-area box-erro">
+            <div id="math-erro" class="res-math"></div>
+            <span id="val-erro" class="res-value"></span>
+            <div class="info-block">
+                <strong>Variável H:</strong> Nível circulante atual de testosterona.<br>
+                <strong>O que se espera (Ótimo):</strong> Um ΔH próximo de zero, indicando que o paciente atingiu o alvo fisiológico masculino.<br>
+                <strong>Significado Clínico:</strong> O erro de 420ng/dL no Rodrigo prova que o "termostato" (Hipotálamo) não está disparando GnRH para corrigir o déficit.
+            </div>
         </div>
     </div>
 
     <div class="section">
-        <h2>2. Segurança de Crescimento (R)</h2>
-        <div class="formula-box">R = <span>IO</span> / <span>IC</span></div>
+        <h2>2. Rácio de Maturação Óssea (R)</h2>
+        <div class="formula-box">R = <span>Idade Óssea (IO)</span> / <span>Idade Cronológica (IC)</span></div>
         <div class="input-group">
-            <label>Idade Óssea (Anos)</label>
+            <label>Idade Óssea (Anos - via Raio-X)</label>
             <input type="number" id="io" value="14">
         </div>
         <div class="input-group">
-            <label>Idade Cronológica (Anos)</label>
+            <label>Idade Cronológica (Anos - Registro)</label>
             <input type="number" id="ic" value="18">
         </div>
-        <button class="btn-calc" onclick="calcRacio()">Calcular Rácio</button>
-        <div id="box-racio" class="result-area res-racio">
-            <div id="val-racio" class="res-value"></div>
-            <div id="expl-racio" class="res-expl"></div>
+        <button class="btn-calc" onclick="calcRacio()">Analisar Segurança de Crescimento</button>
+        
+        <div id="box-racio" class="result-area box-racio">
+            <div id="math-racio" class="res-math"></div>
+            <span id="val-racio" class="res-value"></span>
+            <div class="info-block">
+                <strong>Variáveis:</strong> <em>IO</em> é a idade biológica dos tecidos; <em>IC</em> é o tempo de vida.<br>
+                <strong>O que se espera (Ótimo):</strong> No tratamento do hipogonadismo, esperamos que <strong>R < 1</strong>. <br>
+                <strong>Significado Clínico:</strong> Se o rácio for 0.77, o Rodrigo ainda tem 23% de potencial de crescimento. Se o rácio chegar a 1.0, as epífises fecharam e o tratamento hormonal não aumentará mais sua altura.
+            </div>
         </div>
     </div>
 
     <div class="section">
-        <h2>3. Homeostase Metabólica (HOMA-IR)</h2>
-        <div class="formula-box">HOMA = (<span>G</span> × <span>I</span>) / 405</div>
+        <h2>3. Homeostase da Insulina (HOMA-IR)</h2>
+        <div class="formula-box">HOMA-IR = (<span>Glicose</span> × <span>Insulina</span>) / 405</div>
         <div class="input-group">
-            <label>Glicose (mg/dL)</label>
+            <label>Glicose de Jejum (mg/dL)</label>
             <input type="number" id="glic" value="90">
         </div>
         <div class="input-group">
-            <label>Insulina (µUI/mL)</label>
+            <label>Insulina de Jejum (µUI/mL)</label>
             <input type="number" id="ins" value="15">
         </div>
-        <button class="btn-calc" onclick="calcHoma()">Calcular HOMA-IR</button>
-        <div id="box-homa" class="result-area res-homa">
-            <div id="val-homa" class="res-value"></div>
-            <div id="expl-homa" class="res-expl"></div>
+        <button class="btn-calc" onclick="calcHoma()">Avaliar Equilíbrio Metabólico</button>
+        
+        <div id="box-homa" class="result-area box-homa">
+            <div id="math-homa" class="res-math"></div>
+            <span id="val-homa" class="res-value"></span>
+            <div class="info-block">
+                <strong>Variáveis:</strong> <em>Glicose</em> (combustível) e <em>Insulina</em> (chave de entrada).<br>
+                <strong>O que se espera (Ótimo):</strong> Valores <strong>abaixo de 2.5</strong>.<br>
+                <strong>Significado Clínico:</strong> Um HOMA elevado no Rodrigo indica que a falta de testosterona e a gordura ginóide estão gerando resistência insulínica, sobrecarregando o pâncreas.
+            </div>
         </div>
     </div>
 
-    <div class="footer">Faculdade Medicina do Sertão • 2026</div>
+    <div class="footer">FACULDADE MEDICINA DO SERTÃO • TUTORIA DE ENDOCRINOLOGIA</div>
 </div>
 
 <script>
     function calcErro() {
-        const val = 500 - document.getElementById('testo').value;
-        document.getElementById('val-erro').innerText = `Déficit: ${val} ng/dL`;
+        const h = document.getElementById('testo').value;
+        const res = 500 - h;
+        document.getElementById('math-erro').innerText = `Memória: 500 (Alvo) - ${h} (Atual)`;
+        document.getElementById('val-erro').innerText = `Déficit Sérico: ${res} ng/dL`;
         document.getElementById('box-erro').style.display = 'block';
     }
 
@@ -117,11 +139,8 @@
         const io = document.getElementById('io').value;
         const ic = document.getElementById('ic').value;
         const res = (io / ic).toFixed(2);
+        document.getElementById('math-racio').innerText = `Memória: ${io} (IO) / ${ic} (IC)`;
         document.getElementById('val-racio').innerText = `Rácio: ${res}`;
-        let desc = res < 1 
-            ? `<strong>Interpretação:</strong> R < 1 indica cartilagens abertas. O Rodrigo tem "combustível" para crescer. O tratamento deve ser cauteloso para não fechar essas epífises antes do estirão.`
-            : `<strong>Interpretação:</strong> R ≥ 1 indica maturidade óssea completa. Não há mais potencial de ganho estatural significante.`;
-        document.getElementById('expl-racio').innerHTML = desc;
         document.getElementById('box-racio').style.display = 'block';
     }
 
@@ -129,11 +148,8 @@
         const g = document.getElementById('glic').value;
         const i = document.getElementById('ins').value;
         const res = ((g * i) / 405).toFixed(2);
-        document.getElementById('val-homa').innerText = `Índice: ${res}`;
-        let desc = res > 2.5 
-            ? `<strong>Interpretação:</strong> Resistência Insulínica detectada. O hipogonadismo está gerando desequilíbrio metabólico. A testosterona ajudará a reduzir a gordura e melhorar este índice.`
-            : `<strong>Interpretação:</strong> Sensibilidade à insulina preservada. O metabolismo da glicose está em equilíbrio.`;
-        document.getElementById('expl-homa').innerHTML = desc;
+        document.getElementById('math-homa').innerText = `Memória: (${g} x ${i}) / 405`;
+        document.getElementById('val-homa').innerText = `Índice HOMA: ${res}`;
         document.getElementById('box-homa').style.display = 'block';
     }
 </script>
